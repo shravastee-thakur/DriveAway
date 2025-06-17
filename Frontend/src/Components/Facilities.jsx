@@ -1,6 +1,6 @@
 const Facilities = () => {
   return (
-    <div className="mt-14">
+    <div className="mt-14 bg-gray-200 py-10">
       <h1 className="text-center font-bold text-xl md:text-4xl">
         Why choose us
       </h1>
