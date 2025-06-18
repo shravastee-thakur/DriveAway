@@ -10,11 +10,13 @@ import {
   registerValidation,
 } from "../validation/joiValidation.js";
 
+import { authenticate } from "../middlewares/authMiddleware.js";
+
 const router = express.Router();
 
 router.post("/register", registerValidation, register);
 router.post("/login", loginValidation, login);
 router.post("/refresh", refreshTokenHandler);
-router.post("/logout", logout);
+router.post("/logout", authenticate, logout);
 
 export default router;

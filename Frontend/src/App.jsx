@@ -7,7 +7,7 @@ import Register from "./Pages/Register";
 
 const App = () => {
   return (
-    <div className="h-full w-full">
+    <div className="h-full w-full bg-orange-100">
       <BrowserRouter>
         <Navbar />
         <Routes>

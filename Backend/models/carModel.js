@@ -1,38 +1,43 @@
-// const carSchema = new mongoose.Schema ({
-// name: {type: String, required: true},
-// image : {type: String, required: true},
-// capacity: {type : Number, required: true},
-// fuelType: {type: String, required: true},
-// bookedTimeSlots: [
-// {
-//     from: {type: String, required: true},
-//     to: {type: String, required: true}
-// }
-// ],
-// rentPerHour: {type: Number, required: true}
+import mongoose from "mongoose";
 
-// }, {timestamps: true}
-// )
-// const carModel = mongoose.model('cars', carSchema)
-// module.exports = carModel
+const carSchema = new mongoose.Schema(
+  {
+    modelName: {
+      type: String,
+      required: true,
+    },
+    pricePerDay: {
+      type: Number,
+      required: true,
+    },
+    seatCapacity: {
+      type: Number,
+      required: true,
+    },
+    fuelType: {
+      type: String,
+      required: true,
+    },
+    transmission: {
+      type: String,
+      enum: ["Manual", "Automatic"],
+    },
+    carImage: {
+      type: String,
+      required: true,
+    },
+    isAvailable: {
+      type: Boolean,
+      default: true,
+    },
+    owner: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
 
-// Booking model
-
-// const mongoose= require("mongoose");
-//         const bookingschema= new mongoose.Schema({
-
-//         car: {type: mongoose.Schema.Types.ObjectID, ref: 'cars'},
-//         user: {type: mongoose.Schema.Types.ObjectID, ref: 'users'},
-//         bookedTimeSlots: {
-//             from : {type: String},
-//             to: {type: String}
-//         },
-//         totalHours: {type: Number},
-//         totalAmount: {type : Number},
-//         transactionId : {type: String},
-//         driverRequired: {type: Boolean}
-//         },
-//         {timestamps: true}
-//         )
-// const bookingModel = mongoose.model('bookings', bookingschema)
-// module.exports = bookingModel
+const Car = mongoose.model("Car", carSchema);
+export default Car;
