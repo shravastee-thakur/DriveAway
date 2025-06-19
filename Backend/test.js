@@ -1,86 +1,50 @@
-import Car from "../Models/carModel.js";
+import { useState, useEffect } from "react";
 
-// @desc    Add a new car
-// @route   POST /api/cars
-export const addCar = async (req, res) => {
-  try {
-    const newCar = await Car.create({ ...req.body, owner: req.userId });
-    res.status(201).json(newCar);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-};
+const Book = () => {
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [days, setDays] = useState(0);
+  const [error, setError] = useState("");
 
-// @desc    Get all cars
-// @route   GET /api/cars
-export const getAllCars = async (req, res) => {
-  try {
-    const cars = await Car.find().populate("owner", "name email");
-    res.json(cars);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+  useEffect(() => {
+    if (startDate && endDate) {
+      const start = new Date(startDate);
+      const end = new Date(endDate);
 
-// @desc    Get single car by ID
-// @route   GET /api/cars/:id
-export const getCarById = async (req, res) => {
-  try {
-    const car = await Car.findById(req.params.id).populate("owner", "name email");
-    if (!car) return res.status(404).json({ message: "Car not found" });
-    res.json(car);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+      if (end < start) {
+        setError("End date cannot be before start date");
+        setDays(0);
+        return;
+      }
 
-// @desc    Update car (only owner allowed)
-// @route   PUT /api/cars/:id
-export const updateCar = async (req, res) => {
-  try {
-    const car = await Car.findById(req.params.id);
-    if (!car) return res.status(404).json({ message: "Car not found" });
-    if (car.owner.toString() !== req.userId)
-      return res.status(403).json({ message: "Not authorized" });
+      setError("");
+      const diffTime = Math.abs(end - start);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      setDays(diffDays);
+    } else {
+      setDays(0);
+    }
+  }, [startDate, endDate]);
 
-    const updatedCar = await Car.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-    });
-    res.json(updatedCar);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-};
+  return (
+    <section className="bg-orange-400 py-14">
+      <div className="bg-orange-200 px-10 py-6 h-auto w-10/12 mx-auto rounded-lg border-2 border-white lg:mx-auto lg:w-11/12 lg:rounded-lg lg:border-3">
+        <div className="grid grid-cols-1 gap-3 md:grid md:grid-cols-2 lg:grid lg:grid-cols-5">
+          {/* ... your existing input fields ... */}
+        </div>
 
-// @desc    Delete car (only owner allowed)
-// @route   DELETE /api/cars/:id
-export const deleteCar = async (req, res) => {
-  try {
-    const car = await Car.findById(req.params.id);
-    if (!car) return res.status(404).json({ message: "Car not found" });
-    if (car.owner.toString() !== req.userId)
-      return res.status(403).json({ message: "Not authorized" });
+        {error && (
+          <div className="flex justify-center mt-4">
+            <p className="font-semibold text-red-600">{error}</p>
+          </div>
+        )}
 
-    await car.remove();
-    res.json({ message: "Car removed" });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
-// @desc    Toggle availability
-// @route   PATCH /api/cars/:id/availability
-export const toggleAvailability = async (req, res) => {
-  try {
-    const car = await Car.findById(req.params.id);
-    if (!car) return res.status(404).json({ message: "Car not found" });
-    if (car.owner.toString() !== req.userId)
-      return res.status(403).json({ message: "Not authorized" });
-
-    car.isAvailable = !car.isAvailable;
-    await car.save();
-    res.json({ message: "Availability updated", isAvailable: car.isAvailable });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
+        {days > 0 && !error && (
+          <div className="flex justify-center mt-4">
+            <p className="font-semibold">Total Days: {days}</p>
+          </div>
+        )}
+      </div>
+    </section>
+  );
 };

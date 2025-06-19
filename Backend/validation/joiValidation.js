@@ -58,13 +58,19 @@ export const loginValidation = (req, res, next) => {
 export const updateBookingValidation = (req, res, next) => {
   try {
     const schema = joi.object({
-      startDate: joi.date().greater("now").messages({
+      car: joi.string().required().messages({
+        "string.empty": "Car ID is required",
+        "any.required": "Car ID is required",
+      }),
+      startDate: joi.date().greater("now").required().messages({
         "date.base": "Start date must be a valid date",
         "date.greater": "Start date must be in the future",
+        "any.required": "Start date is required",
       }),
-      endDate: joi.date().greater(joi.ref("startDate")).messages({
+      endDate: joi.date().greater(joi.ref("startDate")).required().messages({
         "date.base": "End date must be a valid date",
         "date.greater": "End date must be after start date",
+        "any.required": "End date is required",
       }),
     });
 
