@@ -54,3 +54,25 @@ export const loginValidation = (req, res, next) => {
   }
   next();
 };
+
+export const updateBookingValidation = (req, res, next) => {
+  try {
+    const schema = joi.object({
+      startDate: joi.date().greater("now").messages({
+        "date.base": "Start date must be a valid date",
+        "date.greater": "Start date must be in the future",
+      }),
+      endDate: joi.date().greater(joi.ref("startDate")).messages({
+        "date.base": "End date must be a valid date",
+        "date.greater": "End date must be after start date",
+      }),
+    });
+
+    const { error } = schema.validate(req.body);
+    if (error) {
+      return res.status(400).json({ success: false, message: error.message });
+    }
+  } catch (error) {
+    next();
+  }
+};

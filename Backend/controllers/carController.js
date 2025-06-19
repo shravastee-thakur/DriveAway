@@ -1,9 +1,6 @@
-import { rejects } from "assert";
 import Car from "../models/carModel.js";
 import { v2 as cloudinary } from "cloudinary";
 import dotenv from "dotenv";
-import fs from "fs";
-import { resolve } from "path";
 dotenv.config();
 
 cloudinary.config({
@@ -19,6 +16,7 @@ export const createCar = async (req, res, next) => {
       pricePerDay,
       seatCapacity,
       fuelType,
+      type,
       transmission,
       isAvailable,
     } = req.body;
@@ -44,6 +42,7 @@ export const createCar = async (req, res, next) => {
       pricePerDay,
       seatCapacity,
       fuelType,
+      type,
       transmission,
       isAvailable,
       carImage: result.secure_url,
