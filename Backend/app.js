@@ -7,6 +7,9 @@ const app = express();
 
 import userRoutes from "./routes/userRoute.js";
 import carRoutes from "./routes/carRoute.js";
+import bookingRoutes from "./routes/bookingRoutes.js";
+import adminRoutes from "./routes/adminRoute.js";
+
 import fileUpload from "express-fileupload";
 
 // Middlewares
@@ -31,7 +34,14 @@ app.use(
 
 app.use("/api/v1/user", userRoutes);
 // http://localhost:3000/api/v1/user/register
+
 app.use("/api/v1/car", carRoutes);
 // http://localhost:3000/api/v1/car/createCar
+
+app.use("/api/v1/booking", bookingRoutes);
+// http://localhost:3000/api/v1/booking/createBooking
+
+app.use("/api/v1/admin", adminRoutes);
+// http://localhost:3000/api/v1/admin/getAllUsers
 
 export default app;
