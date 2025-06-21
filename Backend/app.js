@@ -15,7 +15,7 @@ import fileUpload from "express-fileupload";
 // Middlewares
 app.use(
   cors({
-    origin: "*",
+    origin: "http://localhost:5173",
     credentials: true,
   })
 );
