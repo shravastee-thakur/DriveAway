@@ -54,13 +54,18 @@ export const login = async (req, res, next) => {
 
     return res
       .status(200)
-      .cookie("newRefreshToken", newRefreshToken, {
+      .cookie("refreshToken", newRefreshToken, {
         httpOnly: true,
         secure: true,
         sameSite: "strict",
         maxAge: 7 * 24 * 60 * 60 * 1000,
       })
-      .json({ success: true, accessToken: newAccessToken, id: user._id });
+      .json({
+        success: true,
+        accessToken: newAccessToken,
+        id: user._id,
+        message: "User logged in successfully",
+      });
   } catch (error) {
     next(error);
   }
@@ -69,7 +74,7 @@ export const login = async (req, res, next) => {
 export const refreshTokenHandler = async (req, res, next) => {
   try {
     const refreshToken = req.cookies.refreshToken;
-    if (!token) {
+    if (!refreshToken) {
       return res
         .status(401)
         .json({ success: false, message: "Unauthorized: Invalid Token" });

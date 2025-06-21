@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Register = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -31,6 +32,13 @@ const Register = () => {
       );
 
       console.log(res.data);
+
+      if (res.data.success) {
+        setUser(res.data.user);
+        alert(res.data.message);
+        setUser({ name: "", email: "", phoneNumber: "", password: "" });
+        navigate("/login");
+      }
     } catch (error) {
       console.error("User registration failed", error);
     }
