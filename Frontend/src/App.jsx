@@ -4,6 +4,7 @@ import Login from "./Pages/Login";
 import Navbar from "./Components/Navbar";
 import Home from "./Pages/Home";
 import Register from "./Pages/Register";
+import CarUpload from "./Pages/CarUpload";
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/addcar" element={<CarUpload />} />
         </Routes>
       </BrowserRouter>
     </div>

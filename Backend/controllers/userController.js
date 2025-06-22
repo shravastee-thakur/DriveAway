@@ -63,7 +63,12 @@ export const login = async (req, res, next) => {
       .json({
         success: true,
         accessToken: newAccessToken,
-        id: user._id,
+        user: {
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+        },
         message: "User logged in successfully",
       });
   } catch (error) {

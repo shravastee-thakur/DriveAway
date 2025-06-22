@@ -1,6 +1,8 @@
+import { NavLink } from "react-router-dom";
+
 const Hero = () => {
   return (
-    <section className="py-8 flex flex-col-reverse md:items-center md:flex md:flex-row w-full">
+    <section className="bg-[#E7F0DC] py-8 flex flex-col-reverse md:items-center md:flex md:flex-row w-full">
       <div className="h-full text-center md:text-end md:pt-10 md:pl-14 lg:pl-32">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold">
           Wherever You Go,
@@ -11,9 +13,11 @@ const Hero = () => {
           <br /> get the perfect car for every journey.
         </h3>
         <div className="flex justify-center mt-4 md:mb-10 lg:mt-10">
-          <button className="bg-orange-600 hover:bg-red-700 shadow-lg text-white px-4 py-1 md:py-2 rounded-md">
-            Book Ride
-          </button>
+          <NavLink to={"/login"}>
+            <button className="bg-orange-600 hover:bg-red-700 shadow-lg text-white px-4 py-1 md:py-2 rounded-md">
+              Book Ride
+            </button>
+          </NavLink>
         </div>
       </div>
 

@@ -1,21 +1,64 @@
-// import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-
-import { NavLink } from "react-router-dom";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { useContext, useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { AuthContext } from "../Context/AuthProvider";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const { accessToken, role, logout } = useContext(AuthContext);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen((prev) => !prev);
+  };
+
+  const handleLogout = async () => {
+    const success = await logout();
+    if (success) {
+      navigate("/");
+    }
+  };
   return (
     <>
-      <nav className="relative flex justify-between items-center text-sm font-semibold py-6 px-4 md:px-12 bg-orange-400">
+      <nav className="relative flex justify-between items-center text-sm font-semibold py-6 px-4 md:px-12 bg-[#3E7B27]">
         <div>
-          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold">
-            <span className="text-white">Drive</span>Away
-          </h1>
+          <NavLink to={"/"}>
+            <h1 className="text-2xl text-yellow-200 md:text-3xl lg:text-4xl font-bold">
+              <span className="text-white">Drive</span>Away
+            </h1>
+          </NavLink>
         </div>
 
-        <div className="flex gap-4">
-          <button className="bg-red-500 hover:bg-yellow-500 text-white px-4 py-1 md:py-2 rounded-md">
-            <NavLink to={"/login"}>LOGIN</NavLink>
-          </button>
+        <div>
+          {accessToken && (
+            <div className="relative py-2 group">
+              <button className="text-white" onClick={toggleDropdown}>
+                <AccountCircleIcon fontSize="large" />
+              </button>
+
+              <div
+                className={`absolute top-full right-0 z-20 w-32 p-5 rounded-md bg-amber-50 border border-gray-600 ${
+                  isDropdownOpen ? "block" : "hidden"
+                }`}
+              >
+                <p
+                  onClick={handleLogout}
+                  className="cursor-pointer text-red-700 text-sm"
+                >
+                  Logout
+                </p>
+                {role === "admin" && (
+                  <>
+                    <hr className="my-2 border-t border-gray-500" />
+                    {/* <NavLink to={"/admin"}> */}
+                    <p className="cursor-pointer text-sky-800 text-sm">Admin</p>
+                    {/* </NavLink> */}
+                  </>
+                )}
+              </div>
+            </div>
+          )}
         </div>
       </nav>
     </>

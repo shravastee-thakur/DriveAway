@@ -59,7 +59,7 @@ export const createCar = async (req, res, next) => {
 
 export const getAllCars = async (req, res, next) => {
   try {
-    const allCars = await Car.find().sort({ createdAt: -1 });
+    const allCars = await Car.find().sort({ pricePerDay: 1 });
     return res.status(200).json({ success: true, allCars });
   } catch (error) {
     next(error);

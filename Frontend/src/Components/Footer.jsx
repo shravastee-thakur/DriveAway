@@ -2,8 +2,8 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-200">
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 px-12 mt-24 pt-12 ">
+    <footer className="bg-[#27667B] text-white">
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 px-12 pt-12 ">
         <div>
           <h1 className="text-2xl font-bold">DriveAway</h1>
           <p className="mt-3">
@@ -44,7 +44,7 @@ const Footer = () => {
               type="email"
               placeholder="Enter Email Address"
             />
-            <button className="bg-[#ff4d30] hover:bg-[#f01a1a] text-white px-4 py-2 mt-2 font-semibold">
+            <button className="bg-[#A0C878] hover:bg-[#DDEB9D] text-white px-4 py-2 mt-2 font-semibold">
               Subscribe
             </button>
           </div>

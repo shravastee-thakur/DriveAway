@@ -34,14 +34,13 @@ const Book = () => {
       endDate,
     };
 
-
     console.log("Sending to backend:", bookingData);
     // axios.post("/api/bookings", bookingData, { headers: { Authorization: `Bearer token` } })
   };
 
   return (
-    <section className="bg-orange-400 py-14">
-      <div className="bg-orange-200 px-10 py-6 h-auto w-10/12 mx-auto rounded-lg border-2 border-white lg:mx-auto lg:w-11/12 lg:rounded-lg lg:border-3">
+    <section className="bg-[#009990] py-14">
+      <div className="bg-[#E1FFBB] px-10 py-6 h-auto w-10/12 mx-auto rounded-lg border-2 border-white lg:mx-auto lg:w-11/12 lg:rounded-lg lg:border-3">
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-5">
           <div className="flex flex-col">
             <label className="md:text-lg">Pick-up</label>
