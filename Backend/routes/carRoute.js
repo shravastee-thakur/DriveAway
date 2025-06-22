@@ -14,7 +14,7 @@ const router = express.Router();
 
 router.post("/createCar", authenticate, allowRole("admin"), createCar);
 router.get("/getAllCars", getAllCars);
-router.get("/getCarById/:id", authenticate, getCarById);
+router.get("/getCarById/:id", getCarById);
 router.delete("/deleteCar/:id", authenticate, allowRole("admin"), deleteCar);
 
 export default router;

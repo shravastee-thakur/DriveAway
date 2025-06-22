@@ -3,7 +3,7 @@ import Car from "../models/carModel.js";
 
 export const createBooking = async (req, res, next) => {
   try {
-    const { car, startDate, endDate } = req.body;
+    const { car, startDate, endDate, pickupLocation, dropLocation } = req.body;
     const user = req.user.id;
 
     const carDetails = await Car.findById(car);
@@ -37,6 +37,8 @@ export const createBooking = async (req, res, next) => {
       user,
       startDate,
       endDate,
+      pickupLocation,
+      dropLocation,
       totalPrice,
     });
 

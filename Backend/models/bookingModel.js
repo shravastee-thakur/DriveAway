@@ -20,6 +20,14 @@ const bookingSchema = new mongoose.Schema(
       type: Date,
       required: true,
     },
+    pickupLocation: {
+      type: String,
+      required: true,
+    },
+    dropLocation: {
+      type: String,
+      required: true,
+    },
     totalPrice: {
       type: Number,
       required: true,

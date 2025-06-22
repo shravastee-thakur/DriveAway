@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Fleet = () => {
+  const navigate = useNavigate();
   const [tab, setTab] = useState(1);
   const [carData, setCarData] = useState([]);
   const [selectedCar, setSelectedCar] = useState(null);
@@ -109,7 +111,10 @@ const Fleet = () => {
                   ₹ {car.pricePerDay.toLocaleString()} /- per day
                 </p>
                 <div className="flex justify-around mt-4 pb-2">
-                  <button className="bg-orange-600 hover:bg-red-600 rounded-md py-1 px-6 sm:px-8 font-semibold text-white">
+                  <button
+                    onClick={() => navigate(`/carDetails/${car._id}`)}
+                    className="bg-orange-600 hover:bg-red-600 rounded-md py-1 px-6 sm:px-8 font-semibold text-white"
+                  >
                     Rent
                   </button>
                   <button
