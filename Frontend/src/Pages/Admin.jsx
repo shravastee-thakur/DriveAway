@@ -109,14 +109,6 @@ const Admin = () => {
             )}
           </tbody>
         </table>
-
-        {/* <div className="flex justify-center items-center mt-6">
-          <NavLink to={"/"}>
-            <button className="bg-[#27667B] hover:bg-[#1f4f5d] text-white font-bold px-4 py-2 rounded-lg transition duration-200">
-              Go to Gallery
-            </button>
-          </NavLink>
-        </div> */}
       </div>
     </div>
   );

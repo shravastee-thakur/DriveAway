@@ -58,7 +58,7 @@ const CarDetails = () => {
         alert("Booking successful!");
       }
     } catch (error) {
-      console.error(error.response?.data?.message || "Booking failed.");
+      console.error(error, "Booking failed.");
     }
   };
 

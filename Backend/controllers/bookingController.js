@@ -61,6 +61,8 @@ export const getAllBookings = async (req, res, next) => {
       .populate("car")
       .populate("user", "-password");
 
+    // from req.user.id
+
     return res.status(200).json({
       success: true,
       data: allBookings,

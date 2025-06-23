@@ -10,9 +10,11 @@ import Admin from "./Pages/Admin";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthProvider";
 import Unauthorised from "./Pages/Unauthorised";
+import MyBooking from "./Pages/MyBooking";
+import AllBooking from "./Pages/AllBooking";
 
 const App = () => {
-  const { role } = useContext(AuthContext);
+  const { accessToken, role } = useContext(AuthContext);
   return (
     <div className="h-full w-full ">
       <BrowserRouter>
@@ -25,10 +27,17 @@ const App = () => {
             <Route path="/carDetails/:carId" element={<CarDetails />} />
           </>
 
+          {accessToken && (
+            <>
+              <Route path="/myBooking" element={<MyBooking />} />
+            </>
+          )}
+
           {role === "admin" && (
             <>
               <Route path="/addcar" element={<CarUpload />} />
               <Route path="/admin" element={<Admin />} />
+              <Route path="/allBooking" element={<AllBooking />} />
             </>
           )}
           <Route path="*" element={<Unauthorised />} />
