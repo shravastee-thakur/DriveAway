@@ -1,8 +1,8 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { BookingContext } from "../Context/BookingProvider";
-import { AuthContext } from "../Context/AuthProvider";
+import { BookingContext } from "../context/BookingProvider";
+import { AuthContext } from "../context/AuthProvider";
 
 const CarDetails = () => {
   const { bookingInfo } = useContext(BookingContext);
@@ -104,10 +104,17 @@ const CarDetails = () => {
               <strong>Drop location:</strong> {bookingInfo.dropLocation}
             </p>
             <p>
-              <strong>Start Date:</strong> {bookingInfo.startDate}
+              <strong>Start date:</strong> {bookingInfo.startDate}
             </p>
             <p>
-              <strong>End Date:</strong> {bookingInfo.endDate}
+              <strong>End date:</strong> {bookingInfo.endDate}
+            </p>
+            <p>
+              <strong>Total days:</strong> {bookingInfo.totalDays}
+            </p>
+            <p>
+              <strong>Total price: </strong>₹{" "}
+              {(bookingInfo.totalDays * car.pricePerDay).toLocaleString()} /-
             </p>
 
             <button

@@ -8,6 +8,7 @@ const BookingProvider = ({ children }) => {
     endDate: "",
     pickupLocation: "",
     dropLocation: "",
+    totalDays: "",
   });
   return (
     <div>

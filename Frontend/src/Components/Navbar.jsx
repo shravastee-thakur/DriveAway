@@ -1,19 +1,19 @@
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { AuthContext } from "../Context/AuthProvider";
+import { AuthContext } from "../context/AuthProvider";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const { accessToken, role, logout } = useContext(AuthContext);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
   };
 
   const handleLogout = async () => {
+    setIsDropdownOpen(false);
     const success = await logout();
     if (success) {
       navigate("/");
@@ -48,12 +48,27 @@ const Navbar = () => {
                 >
                   Logout
                 </p>
+
                 {role === "admin" && (
                   <>
                     <hr className="my-2 border-t border-gray-500" />
-                    {/* <NavLink to={"/admin"}> */}
-                    <p className="cursor-pointer text-sky-800 text-sm">Admin</p>
-                    {/* </NavLink> */}
+                    <NavLink
+                      to={"/admin"}
+                      onClick={() => setIsDropdownOpen(false)}
+                    >
+                      <p className="cursor-pointer text-sky-800 text-sm">
+                        Admin
+                      </p>
+                    </NavLink>
+                    <hr className="my-2 border-t border-gray-500" />
+                    <NavLink
+                      to={"/addcar"}
+                      onClick={() => setIsDropdownOpen(false)}
+                    >
+                      <p className="cursor-pointer text-black text-sm">
+                        Add Car
+                      </p>
+                    </NavLink>
                   </>
                 )}
               </div>

@@ -1,6 +1,6 @@
 import { useContext, useRef, useState } from "react";
 import axios from "axios";
-import { AuthContext } from "../Context/AuthProvider";
+import { AuthContext } from "../context/AuthProvider";
 
 const CarUpload = () => {
   const { accessToken } = useContext(AuthContext);
@@ -69,7 +69,7 @@ const CarUpload = () => {
   };
 
   return (
-    <div className="w-fit mx-auto p-6 bg-amber-50 rounded-xl shadow-md mt-10">
+    <div className="w-fit mx-auto p-6 bg-[#E7F0DC] rounded-xl shadow-md mt-10">
       <h2 className="text-2xl font-semibold mb-6 text-center">
         Upload Car Details
       </h2>
@@ -167,55 +167,3 @@ const CarUpload = () => {
 };
 
 export default CarUpload;
-
-// {success: true, car: {…}, message: 'Car added successfully'}
-// car
-// :
-// carImage
-// :
-// "https://res.cloudinary.com/shravastee/image/upload/v1750514279/DriveAway/copr5tleez0o1aseuhbd.jpg"
-// createdAt
-// :
-// "2025-06-21T13:58:00.507Z"
-// fuelType
-// :
-// "Petrol"
-// isAvailable
-// :
-// true
-// modelName
-// :
-// "Maruti Suzuki Wagon R"
-// owner
-// :
-// "6856328f144f8ee5046a0eae"
-// pricePerDay
-// :
-// 4200
-// seatCapacity
-// :
-// 5
-// transmission
-// :
-// "Manual"
-// type
-// :
-// "Hatchback"
-// updatedAt
-// :
-// "2025-06-21T13:58:00.507Z"
-// __v
-// :
-// 0
-// _id
-// :
-// "6856ba681d1a0af124256ac2"
-// [[Prototype]]
-// :
-// Object
-// message
-// :
-// "Car added successfully"
-// success
-// :
-// true

@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
+import { AuthContext } from "../context/AuthProvider";
 
 const Fleet = () => {
+  const { accessToken, role } = useContext(AuthContext);
   const navigate = useNavigate();
   const [tab, setTab] = useState(1);
   const [carData, setCarData] = useState([]);
@@ -49,6 +52,27 @@ const Fleet = () => {
 
     getCarData();
   }, []);
+
+  const deleteCar = async (carId) => {
+    try {
+      const res = await axios.delete(
+        `http://localhost:3000/api/v1/car/deleteCar/${carId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+          withCredentials: true,
+        }
+      );
+
+      if (res.data.success) {
+        setCarData((prev) => prev.filter((car) => car._id !== carId));
+        alert(res.data.message);
+      }
+    } catch (error) {
+      console.error("Failed to delete car", error);
+    }
+  };
   return (
     <>
       <section className="py-24 bg-[#E7F0DC] ">
@@ -103,6 +127,15 @@ const Fleet = () => {
                 key={car._id}
                 className="hover:border border-blue-400 bg-white  transition ease-in-out delay-150 w-full"
               >
+                {role === "admin" && (
+                  <button
+                    onClick={() => deleteCar(car._id)}
+                    className="pl-2 pt-2"
+                  >
+                    <DeleteForeverOutlinedIcon />
+                  </button>
+                )}
+
                 <img src={car.carImage} className="w-full object-cover" />
                 <h1 className="text-2xl font-bold text-red-800 text-center">
                   {car.modelName}

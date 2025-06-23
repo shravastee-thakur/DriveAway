@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { AuthContext } from "../Context/AuthProvider";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import { AuthContext } from "../context/AuthProvider";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -54,7 +54,7 @@ const Login = () => {
             <input
               onChange={handleChange}
               className="border p-2 rounded-lg bg-white"
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Enter your password"
               name="password"
               value={user.password}

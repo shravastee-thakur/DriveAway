@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { BookingContext } from "../Context/BookingProvider";
+import { BookingContext } from "../context/BookingProvider";
 
 const Book = () => {
   const { bookingInfo, setBookingInfo } = useContext(BookingContext);
@@ -8,15 +8,25 @@ const Book = () => {
   const [endDate, setEndDate] = useState(bookingInfo.endDate || "");
   const [pickup, setPickup] = useState(bookingInfo.pickupLocation || "");
   const [drop, setDrop] = useState(bookingInfo.dropLocation || "");
+  const [days, setDays] = useState(bookingInfo.totalDays || "");
 
   useEffect(() => {
+    const calculatedDays =
+      startDate && endDate
+        ? Math.ceil(
+            (new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24)
+          ) + 1
+        : "";
+
+    setDays(calculatedDays);
     setBookingInfo({
       startDate,
       endDate,
       pickupLocation: pickup,
       dropLocation: drop,
+      totalDays: days,
     });
-  }, [startDate, endDate, pickup, drop]);
+  }, [startDate, endDate, pickup, drop, days]);
 
   return (
     <section className="bg-[#009990] py-14">
@@ -25,6 +35,7 @@ const Book = () => {
           <div className="flex flex-col">
             <label className="md:text-lg">Pick-up</label>
             <input
+              required
               className="bg-white border border-slate-300 py-1 px-1 md:py-2 md:px-4 rounded-lg"
               type="text"
               placeholder="Enter location"
@@ -36,6 +47,7 @@ const Book = () => {
           <div className="flex flex-col">
             <label className="md:text-lg">Drop-off</label>
             <input
+              required
               className="bg-white border border-slate-300 py-1 px-1 md:py-2 md:px-4 rounded-lg"
               type="text"
               placeholder="Enter location"
@@ -47,6 +59,7 @@ const Book = () => {
           <div className="flex flex-col">
             <label className="md:text-lg">Start Date</label>
             <input
+              required
               className="bg-white border border-slate-300 py-1 px-1 md:py-2 md:px-4 rounded-lg"
               type="date"
               value={startDate}
@@ -58,6 +71,7 @@ const Book = () => {
           <div className="flex flex-col">
             <label className="md:text-lg">End Date</label>
             <input
+              required
               className="bg-white border border-slate-300 py-1 px-1 md:py-2 md:px-4 rounded-lg"
               type="date"
               value={endDate}
