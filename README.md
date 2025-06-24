@@ -27,3 +27,6 @@ Delete car listings.
 Cancel or delete bookings.
 - **JOI-based Request Validation** - Ensures data integrity and security through robust server-side validation of all incoming requests.
 - **Secure APIs** - All APIs are secured with rate-limiting to prevent abuse and proper cookie handling for secure session management.
+## Author
+### Shravastee Thakur
+MERN Stack Developer with a focus on Backend Development.
