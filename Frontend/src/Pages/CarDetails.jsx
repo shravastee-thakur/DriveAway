@@ -10,7 +10,7 @@ const CarDetails = () => {
 
   const { carId } = useParams();
   const [car, setCar] = useState(null);
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getCarById = async () => {
@@ -56,6 +56,7 @@ const CarDetails = () => {
       console.log(res.data);
       if (res.data.success) {
         alert("Booking successful!");
+        navigate("/myBooking");
       }
     } catch (error) {
       console.error(error, "Booking failed.");

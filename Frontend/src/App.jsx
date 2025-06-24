@@ -9,7 +9,6 @@ import CarDetails from "./Pages/CarDetails";
 import Admin from "./Pages/Admin";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthProvider";
-import Unauthorised from "./Pages/Unauthorised";
 import MyBooking from "./Pages/MyBooking";
 import AllBooking from "./Pages/AllBooking";
 
@@ -40,7 +39,6 @@ const App = () => {
               <Route path="/allBooking" element={<AllBooking />} />
             </>
           )}
-          <Route path="*" element={<Unauthorised />} />
         </Routes>
       </BrowserRouter>
     </div>

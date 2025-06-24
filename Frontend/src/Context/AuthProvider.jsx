@@ -73,6 +73,7 @@ const AuthProvider = ({ children }) => {
         setAccessToken(null);
         setRole(null);
         alert(res.data.message);
+        return true;
       }
     } catch (error) {
       console.error("Logout failed", error);

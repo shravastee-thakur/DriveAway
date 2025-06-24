@@ -50,7 +50,7 @@ export const createBooking = async (req, res, next) => {
       .status(200)
       .json({ success: true, data: booking, message: "Booking successful" });
   } catch (error) {
-    next();
+    next(error);
   }
 };
 
@@ -58,8 +58,8 @@ export const getAllBookings = async (req, res, next) => {
   try {
     const allBookings = await Booking.find()
       .sort({ created: -1 })
-      .populate("car")
-      .populate("user", "-password");
+      .populate("car", "modelName")
+      .populate("user", "email");
 
     // from req.user.id
 
@@ -69,7 +69,7 @@ export const getAllBookings = async (req, res, next) => {
       message: "Fetched booking data successfully",
     });
   } catch (error) {
-    next();
+    next(error);
   }
 };
 
@@ -90,7 +90,7 @@ export const getMyBookings = async (req, res, next) => {
       message: "Fetched booking data successfully",
     });
   } catch (error) {
-    next();
+    next(error);
   }
 };
 
@@ -122,6 +122,6 @@ export const deleteBooking = async (req, res, next) => {
       message: "Booking deleted successfully",
     });
   } catch (error) {
-    next();
+    next(error);
   }
 };

@@ -42,6 +42,20 @@ const Navbar = () => {
                   isDropdownOpen ? "block" : "hidden"
                 }`}
               >
+                {role === "user" && (
+                  <>
+                    <NavLink
+                      to={"/myBooking"}
+                      onClick={() => setIsDropdownOpen(false)}
+                    >
+                      <p className="cursor-pointer text-black text-sm">
+                        My Bookings
+                      </p>
+                    </NavLink>
+                    <hr className="my-2 border-t border-gray-500" />
+                  </>
+                )}
+
                 <p
                   onClick={handleLogout}
                   className="cursor-pointer text-red-700 text-sm"
@@ -56,8 +70,8 @@ const Navbar = () => {
                       to={"/admin"}
                       onClick={() => setIsDropdownOpen(false)}
                     >
-                      <p className="cursor-pointer text-sky-800 text-sm">
-                        Admin
+                      <p className="cursor-pointer text-black text-sm">
+                        All Users
                       </p>
                     </NavLink>
                     <hr className="my-2 border-t border-gray-500" />
@@ -67,6 +81,15 @@ const Navbar = () => {
                     >
                       <p className="cursor-pointer text-black text-sm">
                         Add Car
+                      </p>
+                    </NavLink>
+                    <hr className="my-2 border-t border-gray-500" />
+                    <NavLink
+                      to={"/allBooking"}
+                      onClick={() => setIsDropdownOpen(false)}
+                    >
+                      <p className="cursor-pointer text-black text-sm">
+                        All Bookings
                       </p>
                     </NavLink>
                   </>

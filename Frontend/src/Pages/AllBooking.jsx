@@ -64,7 +64,7 @@ const AllBooking = () => {
     <div className="admin-container flex flex-col items-center justify-center px-2 py-4 mt-10">
       <div className="w-full max-w-full md:max-w-[85%] lg:max-w-[70%] overflow-x-auto">
         <h2 className="text-xl md:text-2xl font-bold text-center mb-4">
-          Manage Users
+          All Bookings
         </h2>
 
         <TableContainer component={Paper}>
@@ -91,10 +91,10 @@ const AllBooking = () => {
                   </TableCell>
                   <TableCell align="right">{booking.car?.modelName}</TableCell>
                   <TableCell align="right">
-                    {new Date(booking.startDate).toLocaleDateString()}
+                    {new Date(booking.startDate).toLocaleDateString("en-GB")}
                   </TableCell>
                   <TableCell align="right">
-                    {new Date(booking.endDate).toLocaleDateString()}
+                    {new Date(booking.endDate).toLocaleDateString("en-GB")}
                   </TableCell>
                   <TableCell align="right">{booking.pickupLocation}</TableCell>
                   <TableCell align="right">{booking.dropLocation}</TableCell>

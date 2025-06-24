@@ -2,6 +2,13 @@ import { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../context/AuthProvider";
 import axios from "axios";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 
 const Admin = () => {
   const { accessToken, role } = useContext(AuthContext);
@@ -61,54 +68,50 @@ const Admin = () => {
           Manage Users
         </h2>
 
-        <table className="min-w-full border-collapse border border-gray-300 text-sm md:text-base">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="border border-gray-300 px-2 md:px-4 py-2 text-left">
-                Name
-              </th>
-              <th className="border border-gray-300 px-2 md:px-4 py-2 text-left">
-                Email
-              </th>
-              <th className="border border-gray-300 px-2 md:px-4 py-2 text-center">
-                Action
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {users && users.length > 0 ? (
-              users.map((user, index) => (
-                <tr key={index} className="text-center">
-                  <td className="border border-gray-300 px-2 md:px-4 py-2 text-left">
-                    {user.name}
-                  </td>
-                  <td className="border border-gray-300 px-2 md:px-4 py-2 text-left break-all">
-                    {user.email}
-                  </td>
-                  <td className="border border-gray-300 px-2 md:px-4 py-2">
-                    <button
-                      onClick={() => handleDelete(user._id)}
-                      className={`px-3 py-1 rounded text-white ${
-                        user.role === "admin"
-                          ? "bg-gray-500 cursor-not-allowed"
-                          : "bg-red-500 hover:bg-red-600"
-                      }`}
-                      disabled={user.role === "admin"}
-                    >
-                      Delete
-                    </button>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow className="bg-[#E7F0DC] ">
+                <TableCell align="center">Name</TableCell>
+                <TableCell align="center">Email</TableCell>
+                <TableCell align="center">Action</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {users && users.length > 0 ? (
+                users.map((user, index) => (
+                  <TableRow
+                    key={index}
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell align="center">{user.name}</TableCell>
+                    <TableCell align="center">{user.email}</TableCell>
+
+                    <TableCell align="center">
+                      <button
+                        className={`px-3 py-1 rounded text-white ${
+                          user.role === "admin"
+                            ? "bg-gray-500 cursor-not-allowed"
+                            : "bg-red-500 hover:bg-red-600"
+                        }`}
+                        disabled={user.role === "admin"}
+                        onClick={() => handleDelete(user._id)}
+                      >
+                        Delete
+                      </button>
+                    </TableCell>
+                  </TableRow>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="3" className="text-center py-4">
+                    No users found
                   </td>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="3" className="text-center py-4">
-                  No users found
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </div>
     </div>
   );
