@@ -1,6 +1,18 @@
-import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const { accessToken } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (accessToken) {
+      alert("Already logged in. Please continue with booking");
+    } else {
+      navigate("/login");
+    }
+  };
   return (
     <section className="bg-[#E7F0DC] py-8 flex flex-col-reverse md:items-center md:flex md:flex-row w-full">
       <div className="h-full text-center md:text-end md:pt-10 md:pl-14 lg:pl-32">
@@ -13,11 +25,12 @@ const Hero = () => {
           <br /> get the perfect car for every journey.
         </h3>
         <div className="flex justify-center mt-4 md:mb-10 lg:mt-10">
-          <NavLink to={"/login"}>
-            <button className="bg-orange-600 hover:bg-red-700 shadow-lg text-white px-4 py-1 md:py-2 rounded-md">
-              Book Ride
-            </button>
-          </NavLink>
+          <button
+            onClick={handleClick}
+            className="bg-orange-600 hover:bg-red-700 shadow-lg text-white px-4 py-1 md:py-2 rounded-md"
+          >
+            Book Ride
+          </button>
         </div>
       </div>
 

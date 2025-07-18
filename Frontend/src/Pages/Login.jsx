@@ -32,7 +32,7 @@ const Login = () => {
   };
 
   return (
-    <section className="my-4 md:mt-4 lg:mt-28 flex justify-center items-center">
+    <section className="my-4 md:mt-8 lg:mt-20 flex justify-center items-center">
       <div className="relative w-10/12 sm:w-3/4 md:w-2/5 lg:w-1/4 border-2 rounded-xl p-4 md:p-6 bg-[#E7F0DC]">
         <h1 className="text-center mt-3 text-2xl font-bold">Login</h1>
 

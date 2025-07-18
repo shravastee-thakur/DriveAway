@@ -38,28 +38,32 @@ const CarDetails = () => {
       return;
     }
 
-    try {
-      const res = await axios.post(
-        "http://localhost:3000/api/v1/booking/createBooking",
-        {
-          car: carId,
-          ...bookingInfo,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
+    if (accessToken) {
+      try {
+        const res = await axios.post(
+          "http://localhost:3000/api/v1/booking/createBooking",
+          {
+            car: carId,
+            ...bookingInfo,
           },
-          withCredentials: true,
-        }
-      );
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+            withCredentials: true,
+          }
+        );
 
-      console.log(res.data);
-      if (res.data.success) {
-        alert("Booking successful!");
-        navigate("/myBooking");
+        console.log(res.data);
+        if (res.data.success) {
+          alert("Booking successful!");
+          navigate("/myBooking");
+        }
+      } catch (error) {
+        console.error(error, "Booking failed.");
       }
-    } catch (error) {
-      console.error(error, "Booking failed.");
+    } else {
+      navigate("/login");
     }
   };
 

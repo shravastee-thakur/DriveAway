@@ -69,40 +69,42 @@ const CarUpload = () => {
   };
 
   return (
-    <div className="w-fit mx-auto p-6 bg-[#E7F0DC] rounded-xl shadow-md mt-10">
+    <div className="w-full max-w-2xl mx-auto p-6 bg-[#E7F0DC] rounded-xl shadow-md mt-10">
       <h2 className="text-2xl font-semibold mb-6 text-center">
         Upload Car Details
       </h2>
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="flex gap-10 justify-between">
+        {/* First Row */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <input
             name="modelName"
             onChange={handleChange}
             value={formData.modelName}
             required
             placeholder="Model Name"
-            className="border p-2 rounded-lg bg-white"
+            className="border p-2 rounded-lg bg-white w-full"
           />
           <input
             name="pricePerDay"
-            onChange={handleChange}
             type="number"
+            onChange={handleChange}
             value={formData.pricePerDay}
             required
             placeholder="Price Per Day"
-            className="border p-2 rounded-lg bg-white"
+            className="border p-2 rounded-lg bg-white w-full"
           />
         </div>
 
-        <div className="flex justify-between">
+        {/* Second Row */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <input
             name="seatCapacity"
+            type="number"
             onChange={handleChange}
             value={formData.seatCapacity}
-            type="number"
             required
             placeholder="Seat Capacity"
-            className="border p-2 rounded-lg bg-white"
+            className="border p-2 rounded-lg bg-white w-full"
           />
           <input
             name="fuelType"
@@ -110,17 +112,18 @@ const CarUpload = () => {
             value={formData.fuelType}
             required
             placeholder="Fuel Type"
-            className="border p-2 rounded-lg bg-white"
+            className="border p-2 rounded-lg bg-white w-full"
           />
         </div>
 
-        <div className="flex gap-5 justify-between">
+        {/* Third Row */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <select
             name="type"
             onChange={handleChange}
             value={formData.type}
             required
-            className="border p-2 rounded-lg bg-white"
+            className="border p-2 rounded-lg bg-white w-full"
           >
             <option value="">Select Car Type</option>
             <option value="Hatchback">Hatchback</option>
@@ -134,7 +137,7 @@ const CarUpload = () => {
             onChange={handleChange}
             value={formData.transmission}
             required
-            className="border p-2 rounded-lg bg-white"
+            className="border p-2 rounded-lg bg-white w-full"
           >
             <option value="">Select Transmission</option>
             <option value="Manual">Manual</option>
@@ -142,6 +145,7 @@ const CarUpload = () => {
           </select>
         </div>
 
+        {/* Image Upload */}
         <div>
           <label className="block mb-1 font-medium">Upload Car Image</label>
           <input
@@ -155,9 +159,10 @@ const CarUpload = () => {
           />
         </div>
 
+        {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-orange-600 hover:bg-red-700 text-white py-2 rounded-md  transition"
+          className="w-full bg-orange-600 hover:bg-red-700 text-white py-2 rounded-md transition"
         >
           Upload Car
         </button>
