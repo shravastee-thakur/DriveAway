@@ -39,7 +39,7 @@ const Fleet = () => {
     const getCarData = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:3000/api/v1/car/getAllCars"
+          "https://driveaway.onrender.com/api/v1/car/getAllCars"
         );
 
         if (res.data.success) {
@@ -56,7 +56,7 @@ const Fleet = () => {
   const deleteCar = async (carId) => {
     try {
       const res = await axios.delete(
-        `http://localhost:3000/api/v1/car/deleteCar/${carId}`,
+        `https://driveaway.onrender.com/api/v1/car/deleteCar/${carId}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
