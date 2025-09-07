@@ -12,7 +12,7 @@ const AuthProvider = ({ children }) => {
     const getRefreshToken = async () => {
       try {
         const res = await axios.post(
-          "http://localhost:3000/api/v1/user/refresh",
+          "https://driveaway.onrender.com/api/v1/user/refresh",
           {},
           {
             withCredentials: true,
@@ -37,7 +37,7 @@ const AuthProvider = ({ children }) => {
   const login = async (userData) => {
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/v1/user/login",
+        "https://driveaway.onrender.com/api/v1/user/login",
         userData,
         { withCredentials: true }
       );
@@ -59,7 +59,7 @@ const AuthProvider = ({ children }) => {
     if (!accessToken) return;
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/v1/user/logout",
+        "https://driveaway.onrender.com/api/v1/user/logout",
         {},
         {
           headers: {

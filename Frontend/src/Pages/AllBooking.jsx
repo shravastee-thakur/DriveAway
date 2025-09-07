@@ -17,7 +17,7 @@ const AllBooking = () => {
     const getAllBookings = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:3000/api/v1/booking/getAllBookings",
+          "https://driveaway.onrender.com/api/v1/booking/getAllBookings",
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -42,7 +42,7 @@ const AllBooking = () => {
   const handleDelete = async (bookingId) => {
     try {
       const res = await axios.delete(
-        `http://localhost:3000/api/v1/booking/deleteBooking/${bookingId}`,
+        `https://driveaway.onrender.com/api/v1/booking/deleteBooking/${bookingId}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,

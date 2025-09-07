@@ -24,7 +24,7 @@ const Register = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/v1/user/register",
+        "https://driveaway.onrender.com/api/v1/user/register",
         user,
         {
           withCredentials: true,

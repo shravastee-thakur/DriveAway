@@ -16,7 +16,7 @@ const CarDetails = () => {
     const getCarById = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:3000/api/v1/car/getCarById/${carId}`
+          `https://driveaway.onrender.com/api/v1/car/getCarById/${carId}`
         );
 
         if (res.data.success) {

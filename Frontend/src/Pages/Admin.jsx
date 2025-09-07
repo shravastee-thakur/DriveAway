@@ -18,7 +18,7 @@ const Admin = () => {
     const fetchAllUsers = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:3000/api/v1/admin/getAllUsers",
+          "https://driveaway.onrender.com/api/v1/admin/getAllUsers",
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -42,7 +42,7 @@ const Admin = () => {
   const handleDelete = async (userId) => {
     try {
       const res = await axios.delete(
-        `http://localhost:3000/api/v1/admin/deleteUser/${userId}`,
+        `https://driveaway.onrender.com/api/v1/admin/deleteUser/${userId}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
