@@ -15,7 +15,7 @@ import fileUpload from "express-fileupload";
 // Middlewares
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://shra-driveaway.netlify.app/",
     credentials: true,
   })
 );
