@@ -1,3 +1,10 @@
+
+<img width="1259" height="639" alt="DriveAway" src="https://github.com/user-attachments/assets/5f7c6594-2511-4199-a376-d26a6a406bab" />
+
+
+<img width="1247" height="557" alt="OurFleet" src="https://github.com/user-attachments/assets/50135b5f-b1e2-4284-bc26-9bfdb2db8469" />
+
+
 # DriveAway - MERN Car Rental Web App
  DriveAway is a full-stack car rental platform built with the MERN stack, offering a comprehensive and secure experience for both users and administrators. This application provides robust features including secure authentication with refresh token rotation, role-based access control, seamless car listings with image uploads, and an efficient booking system.
 
