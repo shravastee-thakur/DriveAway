@@ -56,7 +56,7 @@ export const login = async (req, res, next) => {
       .status(200)
       .cookie("refreshToken", newRefreshToken, {
         httpOnly: true,
-        secure: true,
+        secure: process.env.NODE_ENV === "production",
         sameSite: "strict",
         maxAge: 7 * 24 * 60 * 60 * 1000,
       })
@@ -87,7 +87,7 @@ export const refreshTokenHandler = async (req, res, next) => {
 
     const decoded = verifyRefreshToken(refreshToken);
 
-    const user = await User.findById({ _id: decoded.id, refreshToken });
+    const user = await User.findOne({ _id: decoded.id, refreshToken });
 
     if (!user) {
       return res
@@ -131,7 +131,7 @@ export const logout = async (req, res, next) => {
 
     const user = await User.findOne({ refreshToken: token });
     if (user) {
-      (user.refreshToken = ""), await user.save();
+      ((user.refreshToken = ""), await user.save());
     }
 
     return res
