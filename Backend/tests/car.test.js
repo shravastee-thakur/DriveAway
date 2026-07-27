@@ -5,6 +5,7 @@ import app from "../app.js";
 import { connect, clearDatabase, closeDatabase } from "./db.js";
 import { jest } from "@jest/globals";
 import { v2 as cloudinary } from "cloudinary";
+import Car from "../models/carModel.js";
 
 // 1. Intercept the upload to prevent network calls
 jest
@@ -105,6 +106,117 @@ describe("Car API Routes", () => {
 
       expect(response.status).toBe(400);
       expect(response.body.message).toBe("Car image is required");
+    });
+  });
+
+  describe("GET /api/v1/car/getAllCars", () => {
+    it("should return a list of all cars (Public Route)", async () => {
+      // 1. Inject a car directly into the database
+      await Car.create({
+        modelName: "Ford Mustang",
+        pricePerDay: 150,
+        seatCapacity: 4,
+        fuelType: "Petrol",
+        type: "Hatchback",
+        transmission: "Manual",
+        carImage: "https://fake-url.com/mustang.jpg",
+        owner: "6a648e993b51bd6f3f1eeb9e",
+      });
+
+      // 2. Hit the route
+      const response = await request(app).get("/api/v1/car/getAllCars");
+
+      // 3. Assertions
+      expect(response.status).toBe(200);
+      expect(response.body.success).toBe(true);
+      expect(response.body.allCars.length).toBe(1);
+      expect(response.body.allCars[0].modelName).toBe("Ford Mustang");
+    });
+  });
+
+  describe("GET /api/v1/car/getCarById/:id", () => {
+    it("should return a specific car by its ID", async () => {
+      const newCar = await Car.create({
+        modelName: "Honda Civic",
+        pricePerDay: 60,
+        seatCapacity: 5,
+        fuelType: "Petrol",
+        type: "Sedan",
+        transmission: "Automatic",
+        carImage: "https://fake-url.com/honda.jpg",
+        owner: "6a648e993b51bd6f3f1eeb9e",
+      });
+
+      // Pass the dynamically generated MongoDB ID into the URL
+      const response = await request(app).get(
+        `/api/v1/car/getCarById/${newCar._id}`,
+      );
+
+      expect(response.status).toBe(200);
+      expect(response.body.success).toBe(true);
+      expect(response.body.car.modelName).toBe("Honda Civic");
+    });
+
+    it("should return 404 if the car ID does not exist", async () => {
+      const fakeId = "6a648e993b51bd6f3f1eeb9e";
+
+      const response = await request(app).get(
+        `/api/v1/car/getCarById/${fakeId}`,
+      );
+
+      expect(response.status).toBe(404);
+      expect(response.body.message).toBe("Car not found");
+    });
+  });
+
+  describe("DELETE /api/v1/car/deleteCar/:id", () => {
+    it("should successfully delete a car if the user is an admin", async () => {
+      const carToDelete = await Car.create({
+        modelName: "Junk Car",
+        pricePerDay: 10,
+        seatCapacity: 2,
+        fuelType: "Electric",
+        type: "Hatchback",
+        transmission: "Manual",
+        carImage: "https://fake-url.com/junk.jpg",
+        owner: "6a648e993b51bd6f3f1eeb9e",
+      });
+
+      // Send the request using our adminToken
+      const response = await request(app)
+        .delete(`/api/v1/car/deleteCar/${carToDelete._id}`)
+        .set("Authorization", `Bearer ${adminToken}`);
+
+      expect(response.status).toBe(200);
+      expect(response.body.success).toBe(true);
+      expect(response.body.message).toBe("Car deleted successfully");
+
+      // check the database ourselves to make sure it's actually gone
+      const checkDb = await Car.findById(carToDelete._id);
+      expect(checkDb).toBeNull();
+    });
+
+    it("should block a regular user from deleting a car", async () => {
+      const safeCar = await Car.create({
+        modelName: "Safe Car",
+        pricePerDay: 100,
+        seatCapacity: 4,
+        fuelType: "Petrol",
+        type: "SUV",
+        transmission: "Automatic",
+        carImage: "https://fake-url.com/safe.jpg",
+        owner: "6a648e993b51bd6f3f1eeb9e",
+      });
+
+      // Send the request using the regular userToken
+      const response = await request(app)
+        .delete(`/api/v1/car/deleteCar/${safeCar._id}`)
+        .set("Authorization", `Bearer ${userToken}`);
+
+      expect(response.status).toBe(403);
+      expect(response.body.message).toBe(
+        "Access denied: insufficient permissions",
+      );
     });
   });
 });
