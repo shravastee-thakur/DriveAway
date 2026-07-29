@@ -27,7 +27,7 @@ export const createBooking = async (req, res, next) => {
 
     const days =
       Math.ceil(
-        (new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24)
+        (new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24),
       ) + 1;
 
     const totalPrice = days * carDetails.pricePerDay;
@@ -40,10 +40,6 @@ export const createBooking = async (req, res, next) => {
       pickupLocation,
       dropLocation,
       totalPrice,
-    });
-
-    await Car.findByIdAndUpdate(car, {
-      $push: { bookingsId: booking._id },
     });
 
     return res
