@@ -12,5 +12,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Placeholder step
-        run: echo "Hello from the GitHub robot"
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Prove the code arrived
+        run: ls -la Backend
