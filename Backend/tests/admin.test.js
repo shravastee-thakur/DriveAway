@@ -7,7 +7,7 @@ beforeAll(async () => await connect());
 afterEach(async () => await clearDatabase());
 afterAll(async () => await closeDatabase());
 
-describle("Admin API Routes", () => {
+describe("Admin API Routes", () => {
   let adminToken;
   let adminId;
   let regularUserId;
