@@ -31,4 +31,7 @@ jobs:
         run: npm ls express
       - name: Run tests
         working-directory: Backend
+        env:
+          ACCESS_SECRET: ${{secrets.ACCESS_SECRET}}
+          REFRESH_SECRET: ${{secrets.REFRESH_SECRET}}
         run: npm run test
