@@ -29,3 +29,6 @@ jobs:
       - name: Prove installed worked
         working-directory: Backend
         run: npm ls express
+      - name: Run tests
+        working-directory: Backend
+        run: npm run test
