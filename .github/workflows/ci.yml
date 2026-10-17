@@ -39,3 +39,9 @@ jobs:
         run: npm run test
       - name: Build docker image
         run: docker build -f Backend/Dockerfile -t driveaway-backend:ci Backend
+      - name: Log in to Github Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+      - name: Tag and push image
+        run: |
+          docker tag driveaway-backend:ci ghcr.io/shravastee-thakur/driveaway-backend:${{ github.sha }}
+          docker push ghcr.io/shravastee-thakur/driveaway-backend:${{ github.sha }}
