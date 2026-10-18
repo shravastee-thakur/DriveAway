@@ -17,7 +17,7 @@ app.use(
   cors({
     origin: "https://shra-driveaway.netlify.app",
     credentials: true,
-  })
+  }),
 );
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -27,8 +27,12 @@ app.use(
   fileUpload({
     useTempFiles: false,
     limits: { fileSize: 5 * 1024 * 1024 },
-  })
+  }),
 );
+
+app.get("/api/v1/health", (req, res) => {
+  res.status(200).json({ success: true, message: "API is healthy" });
+});
 
 // Routes
 
