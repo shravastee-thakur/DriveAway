@@ -7,7 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../context/AuthProvider";
+import { AuthContext } from "../Context/AuthProvider";
 
 const MyBooking = () => {
   const [myBooking, setMyBooking] = useState([]);
@@ -23,7 +23,7 @@ const MyBooking = () => {
               Authorization: `Bearer ${accessToken}`,
             },
             withCredentials: true,
-          }
+          },
         );
 
         if (res.data.success) {
@@ -46,11 +46,11 @@ const MyBooking = () => {
             Authorization: `Bearer ${accessToken}`,
           },
           withCredentials: true,
-        }
+        },
       );
       if (res.data.success) {
         setMyBooking((prev) =>
-          prev.filter((booking) => booking._id !== bookingId)
+          prev.filter((booking) => booking._id !== bookingId),
         );
         alert(res.data.message);
       }

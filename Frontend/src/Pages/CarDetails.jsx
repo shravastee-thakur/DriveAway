@@ -1,8 +1,8 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { BookingContext } from "../context/BookingProvider";
-import { AuthContext } from "../context/AuthProvider";
+import { BookingContext } from "../Context/BookingProvider";
+import { AuthContext } from "../Context/AuthProvider";
 
 const CarDetails = () => {
   const { bookingInfo } = useContext(BookingContext);
@@ -16,7 +16,7 @@ const CarDetails = () => {
     const getCarById = async () => {
       try {
         const res = await axios.get(
-          `https://driveaway.onrender.com/api/v1/car/getCarById/${carId}`
+          `https://driveaway.onrender.com/api/v1/car/getCarById/${carId}`,
         );
 
         if (res.data.success) {
@@ -51,7 +51,7 @@ const CarDetails = () => {
               Authorization: `Bearer ${accessToken}`,
             },
             withCredentials: true,
-          }
+          },
         );
 
         console.log(res.data);

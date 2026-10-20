@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { AuthContext } from "../context/AuthProvider";
+import { AuthContext } from "../Context/AuthProvider";
 
 const Login = () => {
   const navigate = useNavigate();

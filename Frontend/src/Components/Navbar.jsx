@@ -1,7 +1,7 @@
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthProvider";
+import { AuthContext } from "../Context/AuthProvider";
 
 const Navbar = () => {
   const navigate = useNavigate();

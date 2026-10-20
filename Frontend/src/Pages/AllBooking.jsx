@@ -7,7 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import axios from "axios";
-import { AuthContext } from "../context/AuthProvider";
+import { AuthContext } from "../Context/AuthProvider";
 
 const AllBooking = () => {
   const [bookings, setBookings] = useState([]);
@@ -23,7 +23,7 @@ const AllBooking = () => {
               Authorization: `Bearer ${accessToken}`,
             },
             withCredentials: true,
-          }
+          },
         );
 
         if (res.data.success) {
@@ -48,11 +48,11 @@ const AllBooking = () => {
             Authorization: `Bearer ${accessToken}`,
           },
           withCredentials: true,
-        }
+        },
       );
       if (res.data.success) {
         setBookings((prev) =>
-          prev.filter((booking) => booking._id !== bookingId)
+          prev.filter((booking) => booking._id !== bookingId),
         );
         alert(res.data.message);
       }
