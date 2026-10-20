@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { BookingContext } from "../context/BookingProvider";
+import { BookingContext } from "../Context/BookingProvider";
 
 const Book = () => {
   const { bookingInfo, setBookingInfo } = useContext(BookingContext);
@@ -14,7 +14,7 @@ const Book = () => {
     const calculatedDays =
       startDate && endDate
         ? Math.ceil(
-            (new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24)
+            (new Date(endDate) - new Date(startDate)) / (1000 * 60 * 60 * 24),
           ) + 1
         : "";
 

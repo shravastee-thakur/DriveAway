@@ -8,7 +8,7 @@ import CarUpload from "./Pages/CarUpload";
 import CarDetails from "./Pages/CarDetails";
 import Admin from "./Pages/Admin";
 import { useContext } from "react";
-import { AuthContext } from "./context/AuthProvider";
+import { AuthContext } from "./Context/AuthProvider";
 import MyBooking from "./Pages/MyBooking";
 import AllBooking from "./Pages/AllBooking";
 

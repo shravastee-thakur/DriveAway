@@ -1,6 +1,6 @@
 import { useContext, useRef, useState } from "react";
 import axios from "axios";
-import { AuthContext } from "../context/AuthProvider";
+import { AuthContext } from "../Context/AuthProvider";
 
 const CarUpload = () => {
   const { accessToken } = useContext(AuthContext);
@@ -45,7 +45,7 @@ const CarUpload = () => {
             Authorization: `Bearer ${accessToken}`,
           },
           withCredentials: true,
-        }
+        },
       );
       console.log(res.data);
       if (res.data.success) {

@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
-import { AuthContext } from "../context/AuthProvider";
+import { AuthContext } from "../Context/AuthProvider";
 
 const Fleet = () => {
   const { accessToken, role } = useContext(AuthContext);
@@ -21,12 +21,12 @@ const Fleet = () => {
     tab === 2
       ? Hatchback
       : tab === 3
-      ? Sedan
-      : tab === 4
-      ? Muv
-      : tab === 5
-      ? Suv
-      : carData;
+        ? Sedan
+        : tab === 4
+          ? Muv
+          : tab === 5
+            ? Suv
+            : carData;
 
   const openModal = (car) => {
     setSelectedCar(car);
@@ -39,7 +39,7 @@ const Fleet = () => {
     const getCarData = async () => {
       try {
         const res = await axios.get(
-          "https://driveaway.onrender.com/api/v1/car/getAllCars"
+          "https://driveaway.onrender.com/api/v1/car/getAllCars",
         );
 
         if (res.data.success) {
@@ -62,7 +62,7 @@ const Fleet = () => {
             Authorization: `Bearer ${accessToken}`,
           },
           withCredentials: true,
-        }
+        },
       );
 
       if (res.data.success) {

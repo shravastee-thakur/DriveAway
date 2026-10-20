@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { AuthContext } from "../context/AuthProvider";
+import { AuthContext } from "../Context/AuthProvider";
 import axios from "axios";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -24,7 +24,7 @@ const Admin = () => {
               Authorization: `Bearer ${accessToken}`,
             },
             withCredentials: true,
-          }
+          },
         );
 
         if (res.data.success) {
@@ -48,11 +48,11 @@ const Admin = () => {
             Authorization: `Bearer ${accessToken}`,
           },
           withCredentials: true,
-        }
+        },
       );
       if (res.data.success) {
         setUsers((prevUsers) =>
-          prevUsers.filter((user) => user._id !== userId)
+          prevUsers.filter((user) => user._id !== userId),
         );
         alert(res.data.message);
       }

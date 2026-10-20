@@ -16,7 +16,7 @@ const AuthProvider = ({ children }) => {
           {},
           {
             withCredentials: true,
-          }
+          },
         );
 
         if (res.data.success) {
@@ -25,7 +25,6 @@ const AuthProvider = ({ children }) => {
         }
       } catch (error) {
         if (error.response && error.response.status === 401) {
-        } else {
           console.error("Error during refresh token check:", error);
         }
       }
@@ -39,7 +38,7 @@ const AuthProvider = ({ children }) => {
       const res = await axios.post(
         "https://driveaway.onrender.com/api/v1/user/login",
         userData,
-        { withCredentials: true }
+        { withCredentials: true },
       );
       console.log(res.data);
 
@@ -66,7 +65,7 @@ const AuthProvider = ({ children }) => {
             Authorization: `Bearer ${accessToken}`,
           },
           withCredentials: true,
-        }
+        },
       );
 
       if (res.data.success) {
